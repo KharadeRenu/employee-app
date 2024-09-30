@@ -1,0 +1,54 @@
+<!-- src/app/employee-form/employee-form.component.html -->
+<div>
+    <div class="heading">
+      <div class="content">Add Employee Details</div>
+    </div>
+
+    <div class="parent">
+      <img class="img" src="/assets/img/person.png" alt="Person">
+      <input class="empName" [(ngModel)]="name" placeholder="Employee name" />
+    </div>
+
+    <div class="parent">
+      <img style="top: 160px;" class="img" src="/assets/img/role.png" alt="Role">
+      <select class="empRole" [(ngModel)]="role">
+        <option value="" disabled selected>Select role</option>
+        <option *ngFor="let data of rolesArr" value="{{ data }}">{{ data }}</option>
+      </select>
+    </div>
+    <div class="parent">
+      <div class="container">
+        <mat-form-field style="width: 150px;" appearance="fill">
+          <input matInput [matDatepicker]="picker" [formControl]="selectedStartDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker>
+            <mat-datepicker-actions class="actions">
+              <button mat-raised-button color="cancel" (click)="setToday('start')">Today</button>
+              <button mat-raised-button color="cancel" (click)="setNextMonday()">Next Monday</button>
+              <button mat-raised-button color="cancel" (click)="setNextTuesday()">Next Tuesday</button>
+              <button mat-raised-button color="cancel" (click)="setAfterOneWeek()">After 1 Week</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+        
+        <img src="/assets/img/arrow_right.png">
+
+        <mat-form-field style="width: 150px;" appearance="fill">
+          <input matInput [matDatepicker]="picker1" [formControl]="selectedEndDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1>
+            <mat-datepicker-actions class="actions">
+              <button mat-button color="cancel" (click)="clearDate()">No date</button>
+              <button mat-button color="cancel" (click)="setToday('end')">Today</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>    
+    </div>
+
+    <div class="btnBar">
+      <button class="cancel" (click)="cancelEmployee()"><span class="cancelTxt">Cancel</span></button>
+      <button class="save" (click)="addEmployee()">Save</button>
+    </div>
+  </div>
+  

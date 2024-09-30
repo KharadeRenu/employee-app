@@ -1,0 +1,47 @@
+<div class="parent" [ngClass]="{'noData': !employees$().length}">
+  <div class="heading">
+    <div class="content">Employee List</div>
+  </div>
+  
+  <div *ngIf="!employees$().length" class="img_parent">
+    <img class="img" src="/assets/img/no_data.png" alt="Employee Records Not Found">
+  </div>
+
+  <div class="add_parent">
+    <div class="add_btn" (click)="addEmployee();">
+      <img class="" src="/assets/img/PlusIcon.png" alt="Add Employee">
+    </div>
+  </div>
+
+  <div  *ngIf="employees$().length" class="listHeading">
+    <div class="listTitle">Current employees</div>
+  </div>
+
+  <div>
+    <ng-container *ngFor="let employee of employees$()">
+      <div class="dataContainer" *ngIf="!employee.endDate">
+        <div class="name">{{ employee.name }}</div>
+        <div class="role">{{ employee.role }}</div>
+        <div class="dates">From {{ employee.startDate | date: 'dd MMM, yyyy' }}</div>
+        <button (click)="editEmp(employee)">Edit</button>
+        <button (click)="deleteEmployee(employee.id)">Delete</button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="employees$().length" class="listHeading">
+    <div class="listTitle">Previous employees</div>
+  </div>
+
+  <div>
+    <ng-container *ngFor="let employee of employees$()">
+      <div class="dataContainer" *ngIf="employee.endDate != null">
+        <div class="name">{{ employee.name }}</div>
+        <div class="role">{{ employee.role }}</div>
+        <div class="dates">{{ employee.startDate | date: 'dd MMM, yyyy' }} - {{ employee.endDate | date: 'dd MMM, yyyy' }}</div>
+        <button (click)="editEmp(employee)">Edit</button>
+        <button (click)="deleteEmployee(employee.id)">Delete</button>
+      </div>
+    </ng-container>
+  </div>
+</div>
